@@ -1,0 +1,64 @@
+Experiment 1.1 
+contains dublicate (217)
+
+Aim: 
+Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+
+Algorithm: 
+1. Start.
+2. Accept the array nums as input.
+3. Sort the array in ascending order.
+4. Traverse the array from the first element to the second-last element.
+5. For each index i:
+        Compare the current element nums[i] with the next element nums[i + 1].
+        If both elements are equal:
+                Return True (duplicate found).
+6. If the loop completes without finding any equal adjacent elements:
+        Return False (no duplicates found).
+7. End.
+
+Code- 
+class Solution:
+    def containsDuplicate(self, nums):
+        nums.sort()
+
+        for i in range(len(nums) - 1):
+            if nums[i] == nums[i + 1]:
+                return True
+
+        return False
+
+        
+Experiment 1.2
+contains duplicate II (219)
+
+Aim:
+Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.\
+
+Algorithm:
+1. Start.
+2. Accept the array nums and integer k as input.
+3. Create an empty dictionary last_index to store each element and its most recent index.
+4. Traverse the array from the first element to the last element.
+5. For each index i:
+        Check if the current element nums[i] is already present in the dictionary.
+        If it is present:
+                Calculate the difference between the current index and the previous index stored in the dictionary.
+                If the difference is less than or equal to k, return True (nearby duplicate found).
+        Update the dictionary by storing the current element and its current index.
+6. If the entire array is traversed without finding any nearby duplicate, return False.
+7. End.
+
+Code: 
+class Solution:
+    def containsNearbyDuplicate(self, nums, k):
+        last_index = {}
+
+        for i in range(len(nums)):
+            if nums[i] in last_index:
+                if i - last_index[nums[i]] <= k:
+                    return True
+
+            last_index[nums[i]] = i
+
+        return False
